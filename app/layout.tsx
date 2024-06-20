@@ -27,10 +27,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange>
           <div>
-            <div className='fixed hidden sm:block sm:w-[120px] md:w-64'>
+            <div className='fixed hidden sm:block sm:w-[120px] md:w-[200px]'>
               <SideNav />
             </div>
-            <div className='sm:ml-[120px] md:ml-64'>
+            <div className='sm:ml-[120px] md:ml-[200px]'>
               <Header />
               {children}
             </div>

@@ -6,13 +6,15 @@ export const revalidate = 0;
 
 const Students = async () => {
   const supabase = createClient();
+
   const { count } = await supabase
     .from("students")
     .select("id", { count: "exact", head: true });
 
   const { data: students, error } = await supabase
     .from("students")
-    .select("id, fullname, phone, email, course");
+    .select("id, fullname, phone, email, course")
+    .order("fullname", { ascending: true });
 
   return (
     <>
@@ -22,12 +24,29 @@ const Students = async () => {
           <p className='text-sm text-gray-500'>
             Total number of students: {count}
           </p>
+          {/* <div className="flex flex-wrap gap-3">
+            <p className='text-sm text-gray-500'>
+              Software Dev.: {count}
+            </p>
+            <p className='text-sm text-gray-500'>
+              Graphic Designs: {count}
+            </p>
+            <p className='text-sm text-gray-500'>
+              Photography: {count}
+            </p>
+            <p className='text-sm text-gray-500'>
+              Public Speaking: {count}
+            </p>
+            <p className='text-sm text-gray-500'>
+              Others: {0}
+            </p>
+          </div> */}
         </section>
         <AddNewStudent />
       </div>
 
       <div className='px-4 pt-8 py-12'>
-        <StudentList students={students} />
+        <StudentList students={students} count={count} />
       </div>
     </>
   );

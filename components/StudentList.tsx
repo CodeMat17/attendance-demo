@@ -1,19 +1,12 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import Link from "next/link";
 import { useState } from "react";
 import { Input } from "./ui/input";
 
+import StudentCardList from "./StudentCardList";
+
 type Props = {
+  count: number | null;
   students:
     | {
         id: string;
@@ -22,17 +15,23 @@ type Props = {
         email: string;
         course: string;
       }[]
-  | null
+    | null;
 };
 
-const StudentList = ({ students }: Props) => {
+const StudentList = ({ students, count }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const filteredList = students?.filter((student) => {
     const name = student.fullname.toLowerCase();
+    const phoneNo = student.phone.toLowerCase();
+    const course = student.course.toLowerCase();
+
     const searchTermLower = searchTerm.toLowerCase();
-    return name.includes(searchTermLower);
-    // coop.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return (
+      name.includes(searchTermLower) ||
+      phoneNo.includes(searchTermLower) ||
+      course.includes(searchTermLower)
+    );
   });
 
   return (
@@ -41,45 +40,22 @@ const StudentList = ({ students }: Props) => {
         <Input
           type='search'
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder='Search students'
+          placeholder='Search students by name, course or phone no.'
         />
+        {searchTerm && (
+          <p className='text-center text-sm font-light mt-1 text-gray-400 uppercase'>
+            {searchTerm}: {filteredList?.length}
+          </p>
+        )}
       </div>
 
       <div>
-        {filteredList!.length < 1 ? (
+        {filteredList && filteredList!.length < 1 ? (
           <h1 className='text-center p-5 py-32'>No match found. Try again.</h1>
         ) : (
-          <div className='mt-6'>
-            <Table>
-              {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-              <TableHeader>
-                <TableRow>
-                  <TableHead className='min-w-[180px]'>Full Name</TableHead>
-                  <TableHead>Course</TableHead>
-                  <TableHead>Email</TableHead>
-                  <TableHead className=''>Phone no.</TableHead>
-                </TableRow>
-              </TableHeader>
-
-              <TableBody>
-                {filteredList?.map((list) => (
-                  <TableRow key={list.id}>
-                    <Link href='/dashboard'>
-                      <TableCell>{list.fullname} Anthony Chukwu</TableCell>
-                    </Link>
-                    <TableCell>{list.course}</TableCell>
-                    <TableCell>{list.email}</TableCell>
-                    <TableCell>{list.phone}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TableCell colSpan={3}>Total</TableCell>
-                  <TableCell className='text-right'>$2,500.00</TableCell>
-                </TableRow>
-              </TableFooter>
-            </Table>
+          <div className='mt-8 lg:px-4'>
+            <StudentCardList filteredList={filteredList} count={count} />
+           
           </div>
         )}
       </div>

@@ -1,11 +1,15 @@
+'use client'
+
 import Image from "next/image";
 import Link from "next/link";
 import { MdSettingsSuggest } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
 import { TbLayoutDashboard, TbUsersGroup } from "react-icons/tb";
 import { Button } from "./ui/button";
+import { usePathname } from "next/navigation";
 
 const SideNav = () => {
+  const pathname = usePathname()
   const menuList = [
     { id: 1, name: "Dashboard", icon: TbLayoutDashboard, path: "/dashboard" },
     { id: 2, name: "Students", icon: PiStudent, path: "/dashboard/students" },
@@ -49,7 +53,7 @@ const SideNav = () => {
         <Button
           asChild variant='ghost'
           key={list.id}
-          className='p-5 text-slate-400 rounded-xl w-full flex justify-start hover:bg-gray-800 hover:text-white my-2'>
+          className={`p-5 text-slate-400 rounded-xl w-full flex justify-start hover:bg-gray-800 hover:text-white my-2 ${pathname == list.path && 'border-r-4 border-sky-500 text-sky-500'}`}>
           <Link href={list.path} className='flex justify-center md:justify-start gap-3'>
             <list.icon className='w-7 h-7 md:w-5 md:h-5' />
         <p className="hidden md:flex">{list.name}</p>   

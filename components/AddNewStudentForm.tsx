@@ -149,8 +149,8 @@ const AddNewStudentForm = ({
                       Software Development
                     </SelectItem>
                     <SelectItem value='Photography'>Photography</SelectItem>
-                    <SelectItem value='Graphics Design'>
-                      Graphics Design
+                    <SelectItem value='Graphic Design'>
+                      Graphic Design
                     </SelectItem>
                     <SelectItem value='Public Speaking'>
                       Public Speaking
