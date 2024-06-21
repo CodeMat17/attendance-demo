@@ -1,8 +1,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { CgLoadbar } from "react-icons/cg";
-import { TbEdit, TbGitBranchDeleted } from "react-icons/tb";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { TbEdit } from "react-icons/tb";
+import DeleteStudent from "./modals/DeleteStudent";
+
+export const revalidate = 0
 
 type Props = {
   count: number | null;
@@ -63,12 +66,11 @@ const StudentCardList = ({ filteredList, count }: Props) => {
               <p className='text-sm text-gray-400'>{list.email}</p>
               <p className='text-sm text-gray-400'>{list.phone}</p>
 
-              <div className='absolute bottom-4 right-4 border flex items-center gap-4 px-2 py-1 rounded-xl bg-sky-950 group'>
-                <Link href={`/dashboard/${list.id}`}>
-                  <RiDeleteBin6Line className='w-5 h-5 text-red-500 group-hover:text-red-700' />
-                </Link>
+              <div className='absolute bottom-2 right-2 border flex items-center gap-4 px-2 py-1 rounded-xl bg-sky-950/20 hover:shadow-lg hover:bg-sky-950'>
+                <DeleteStudent id={list.id} name={list.fullname} />
+
                 <Link href={`/dashboard/${list.id}`} className=''>
-                  <TbEdit className='w-6 h-6 text-sky-500' />
+                  <TbEdit className='w-6 h-6 text-sky-400 hover:text-sky-600' />
                 </Link>
               </div>
             </div>
