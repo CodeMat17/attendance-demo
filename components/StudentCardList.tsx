@@ -69,7 +69,7 @@ const StudentCardList = ({ filteredList, count }: Props) => {
               <div className='absolute bottom-2 right-2 border flex items-center gap-4 px-2 py-1 rounded-xl bg-sky-950/20 hover:shadow-lg hover:bg-sky-950'>
                 <DeleteStudent id={list.id} name={list.fullname} />
 
-                <Link href={`/dashboard/${list.id}`} className=''>
+                <Link href={`/dashboard/${list.id}`}>
                   <TbEdit className='w-6 h-6 text-sky-400 hover:text-sky-600' />
                 </Link>
               </div>

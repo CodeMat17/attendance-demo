@@ -17,17 +17,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { CgSpinnerAlt } from "react-icons/cg";
 import { createClient } from "@/utils/supabase/client";
+import { CgSpinnerAlt } from "react-icons/cg";
 import { toast } from "sonner";
 
 // import { toast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
 
 // const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
@@ -54,7 +54,7 @@ const AddNewStudentForm = ({
   setOpenDialog: Dispatch<SetStateAction<boolean>>;
 }) => {
   const supabase = createClient();
-  const router = useRouter()
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMessage] = useState("");
 
@@ -74,8 +74,8 @@ const AddNewStudentForm = ({
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
     try {
-      setLoading(true)
-      setErrorMessage('')
+      setLoading(true);
+      setErrorMessage("");
 
       const { data, error } = await supabase
         .from("students")
@@ -83,33 +83,45 @@ const AddNewStudentForm = ({
         .select();
 
       if (error) {
-        if (error.code === '23505') {
-           setErrorMessage(error.details);
+        if (error.code === "23505") {
+          setErrorMessage(error.details);
         } else {
-          setErrorMessage('Something went wrong. Try again later.');
+          setErrorMessage("Something went wrong. Try again later.");
         }
-       
-        console.log('ErrorCode', error.code);
+
+        console.log("ErrorCode", error.code);
       }
 
       if (data) {
-         router.refresh();
-        toast("Student added successfully.");       
-        setOpenDialog(false);
+        // console.log("DATA: ", data[0]);
+        // console.log("DATA_ID: ", data[0].id);
+        const { data: attendanceData, error: attendanceError } = await supabase
+          .from("attendance")
+          .insert([{ student_id: data[0].id }]);
+
+        if (attendanceError) {
+          await supabase.from("students").delete().eq("id", data[0].id);
+          toast.error("something went wrong (poor internet), try again.");
+        }
+
+        if (!attendanceError) {
+          router.refresh();
+          toast("Student added successfully.");
+          setOpenDialog(false);
+        }
       }
     } catch (error) {
       console.log("Error Msg: ", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  
   }
 
   return (
     <Form {...form}>
       {errorMsg && (
         <p className='text-center text-sm p-2 bg-red-100 text-red-500 rounded-lg'>
-        {errorMsg}
+          {errorMsg}
         </p>
       )}
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-2'>
@@ -199,7 +211,11 @@ const AddNewStudentForm = ({
             type='submit'
             variant='outline'
             className='dark:text-green-500 border-green-500'>
-         {loading ? <CgSpinnerAlt className="animate-spin w-6 h-6" /> : 'Submit'}   
+            {loading ? (
+              <CgSpinnerAlt className='animate-spin w-6 h-6' />
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
       </form>

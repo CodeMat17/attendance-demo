@@ -10,21 +10,31 @@ import { CgCalendarDates } from "react-icons/cg";
 
 import { addMonths } from "date-fns";
 import dayjs from "dayjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const MonthSelection = () => {
+type Props = {
+  setSelectedDate: (value: Date) => void;
+};
+
+const MonthSelection = ({ setSelectedDate }: Props) => {
   const today = new Date();
   const nextMonths = addMonths(today, 0);
   const [month, setMonth] = useState(nextMonths);
 
-    const [date, setDate] = useState<Date | undefined>(today);
-    console.log("DATE: ", date);
+  const [date, setDate] = useState<Date | undefined>(today);
+
+  useEffect(() => {
+    if (date) {
+      // const adjustedDate = new Date(date.getFullYear(), date.getMonth(),date. getDate())
+      setSelectedDate(date);
+    }
+  }, [date, setSelectedDate]);
 
   return (
     <Popover>
-      <PopoverTrigger className='flex items-center  rounded-xl py-2 px-3 bg-gradient-to-br from-sky-600 hover:from-sky-500 transition duration-500 '>
-        <CgCalendarDates className='w-5 h-5 mr-2' />
-        {dayjs(month).format("MMM YYYY")}
+      <PopoverTrigger className='flex items-center  rounded-xl py-2 px-3 bg-gradient-to-br from-sky-600 hover:from-sky-500 transition duration-500 ease-in-out'>
+        <CgCalendarDates className='hidden sm:block w-5 h-5 mr-2' />
+        {dayjs(date).format("DD MMM, YYYY")}
       </PopoverTrigger>
       <PopoverContent className='mr-4'>
         <Calendar
