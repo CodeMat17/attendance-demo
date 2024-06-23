@@ -15,7 +15,11 @@ import { useState } from "react";
 import AddNewStudentForm from "./AddNewStudentForm";
 import { Button } from "./ui/button";
 
-const AddNewStudent = () => {
+type Props = {
+  fetchStudents: () => void;
+}
+
+const AddNewStudent = ({ fetchStudents }: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,7 +32,10 @@ const AddNewStudent = () => {
           <DialogTitle>Add New Student</DialogTitle>
           <DialogDescription></DialogDescription>
         </DialogHeader>
-        <AddNewStudentForm setOpenDialog={setOpen} />
+        <AddNewStudentForm
+          setOpenDialog={setOpen}
+          fetchStudents={fetchStudents}
+        />
       </DialogContent>
     </Dialog>
   );

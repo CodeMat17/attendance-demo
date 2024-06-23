@@ -48,11 +48,15 @@ const formSchema = z.object({
     .email(),
 });
 
+type Props = {
+  fetchStudents: () => void;
+  setOpenDialog: Dispatch<SetStateAction<boolean>>;
+};
+
 const AddNewStudentForm = ({
   setOpenDialog,
-}: {
-  setOpenDialog: Dispatch<SetStateAction<boolean>>;
-}) => {
+  fetchStudents,
+}: Props) => {
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -105,6 +109,7 @@ const AddNewStudentForm = ({
         }
 
         if (!attendanceError) {
+          fetchStudents()
           router.refresh();
           toast("Student added successfully.");
           setOpenDialog(false);

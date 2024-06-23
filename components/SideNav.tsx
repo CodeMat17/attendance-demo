@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 
 const SideNav = () => {
   const pathname = usePathname()
+  // console.log("pathname: ", pathname);
   const menuList = [
     { id: 1, name: "Dashboard", icon: TbLayoutDashboard, path: "/dashboard" },
     { id: 2, name: "Students", icon: PiStudent, path: "/dashboard/students" },

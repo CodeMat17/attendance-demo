@@ -8,7 +8,7 @@ import DeleteStudent from "./modals/DeleteStudent";
 export const revalidate = 0
 
 type Props = {
-  count: number | null;
+  // count: number | null;
   filteredList:
     | {
         id: string;
@@ -20,38 +20,8 @@ type Props = {
     | undefined;
 };
 
-type Student = {
-  id: string;
-  fullname: string;
-  course: string;
-  phone: string;
-  email: string;
-  //   count: number;
-  // other fields...
-};
+const StudentCardList = ({ filteredList }: Props) => {
 
-const StudentCardList = ({ filteredList, count }: Props) => {
-  const [students, setStudents] = useState<Student[]>([]);
-
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const pageSize = 10; // Adjust page size as needed
-
-  if (!filteredList && filteredList === null) {
-    return (
-      <div className='w-full py-32 flex items-center justify-center'>
-        <CgLoadbar className='animate-spin w-6 h-6 mr-3' /> wait...
-      </div>
-    );
-  }
-
-  if (filteredList && filteredList == null) {
-    return (
-      <div className='w-full py-32 flex items-center justify-center'>
-        <CgLoadbar className='animate-spin w-6 h-6 mr-3' /> loading...
-      </div>
-    );
-  }
 
   return (
     <>

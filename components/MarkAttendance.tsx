@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from "react";
 import { CgLoadbar } from "react-icons/cg";
 import { toast } from "sonner";
 import ClassSelection from "./ClassSelection";
-import MonthSelection from "./MonthSelection";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 
@@ -14,7 +13,7 @@ const MarkAttendance = ({ id }: { id: string }) => {
 
   const [loadingAttendance, setLoadingAttendance] = useState(true);
   const [loading, setLoading] = useState(false);
-    const [unmarkLoading, setUnmarkLoading] = useState(false);
+  const [unmarkLoading, setUnmarkLoading] = useState(false);
   const [class_1, setClass1] = useState(null);
   const [class_2, setClass2] = useState(null);
   const [class_3, setClass3] = useState(null);
@@ -22,14 +21,14 @@ const MarkAttendance = ({ id }: { id: string }) => {
   const [class_5, setClass5] = useState(null);
   const [class_6, setClass6] = useState(null);
 
-   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [attendance_date, setAttendanceDate] = useState(selectedDate?.toISOString());
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [attendance_date, setAttendanceDate] = useState(
+    selectedDate?.toISOString()
+  );
 
   const [selectedClass, setSelectedClass] = useState("");
- 
-  const [status, setStatus] = useState("done");
 
- 
+  const [status, setStatus] = useState("done");
 
   const handleSetSelectedDate = (date: Date) => {
     setSelectedDate(date);
@@ -37,21 +36,17 @@ const MarkAttendance = ({ id }: { id: string }) => {
   };
 
   // const attendance_date = selectedDate?.toISOString();
-  console.log("CLASS: ", selectedClass);
-  // console.log("DATE: ", attendanceDate);
-
-    // const date = new Date(selectedDate);
-    // const formattedDate = date.toISOString();
+  // console.log("CLASS: ", selectedClass);
 
   const updates: { [key: string]: string | Date } = {
     [selectedClass]: status,
     // attendance_date,
   };
 
-   const unmarkUpdates: { [key: string]: string} = {
-     [selectedClass]: '',
-     // attendance_date,
-   };
+  const unmarkUpdates: { [key: string]: string } = {
+    [selectedClass]: "",
+    // attendance_date,
+  };
 
   const getAttendance = useCallback(async () => {
     try {
@@ -92,50 +87,58 @@ const MarkAttendance = ({ id }: { id: string }) => {
   }, [id, getAttendance]);
 
   const markAttendance = async () => {
-    try {
-      setLoading(true);
+    if (selectedClass) {
+      try {
+        setLoading(true);
 
-      const { data, error } = await supabase
-        .from("attendance")
-        .update(updates)
-        .eq("student_id", id)
-        .select();
+        const { data, error } = await supabase
+          .from("attendance")
+          .update(updates)
+          .eq("student_id", id)
+          .select();
 
-      if (error) {
-        toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+        }
+        if (data) {
+          getAttendance();
+          toast(`Attendance for ${selectedClass} updated successfully`);
+        }
+      } catch (error) {
+        console.log("ErrorMsg: ", error);
+      } finally {
+        setLoading(false);
       }
-      if (data) {
-        getAttendance();
-        toast(`Attendance for ${selectedClass} updated successfully`);
-      }
-    } catch (error) {
-      console.log("ErrorMsg: ", error);
-    } finally {
-      setLoading(false);
+    } else {
+      toast("You have not selected a class for your operation.");
     }
   };
 
   const unMarkAttendance = async () => {
-    try {
-      setUnmarkLoading(true);
+    if (selectedClass) {
+      try {
+        setUnmarkLoading(true);
 
-      const { data, error } = await supabase
-        .from("attendance")
-        .update(unmarkUpdates)
-        .eq("student_id", id)
-        .select();
+        const { data, error } = await supabase
+          .from("attendance")
+          .update(unmarkUpdates)
+          .eq("student_id", id)
+          .select();
 
-      if (error) {
-        toast.error(error.message);
+        if (error) {
+          toast.error(error.message);
+        }
+        if (data) {
+          getAttendance();
+          toast(`Attendance for ${selectedClass} updated successfully`);
+        }
+      } catch (error) {
+        console.log("ErrorMsg: ", error);
+      } finally {
+        setUnmarkLoading(false);
       }
-      if (data) {
-        getAttendance();
-        toast(`Attendance for ${selectedClass} updated successfully`);
-      }
-    } catch (error) {
-      console.log("ErrorMsg: ", error);
-    } finally {
-      setUnmarkLoading(false);
+    } else {
+      toast("You have not selected a class for your operation.");
     }
   };
 

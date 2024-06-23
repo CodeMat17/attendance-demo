@@ -54,7 +54,7 @@ const StudentList = ({ students, count }: Props) => {
           <h1 className='text-center p-5 py-32'>No match found. Try again.</h1>
         ) : (
           <div className='mt-8 lg:px-4'>
-            <StudentCardList filteredList={filteredList} count={count} />
+            <StudentCardList filteredList={filteredList}  />
            
           </div>
         )}
