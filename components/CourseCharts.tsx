@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-
 type Props = {
   index: number;
   serviceTab: {
@@ -47,8 +46,10 @@ const CourseChart: React.FC<Props> = ({ serviceTab, index }) => {
         value={percentage}
         text={`${percentage}%`}
         styles={buildStyles({
-          textSize: "16px",
+          textSize: "18px",
           trailColor: "#d6d6d6",
+          pathTransitionDuration: 2,
+       
         })}
       />
     </div>

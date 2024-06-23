@@ -82,7 +82,7 @@ const ServiceTab = async () => {
     <div className='mt-4 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
       {serviceTab.map((x, index) => (
         <div key={index} className='flex flex-col items-center'>
-          <div className='w-full flex flex-col items-center justify-center rounded-xl bg-gray-900 border px-2 py-5'>
+          <div className='w-full flex flex-col items-center justify-center rounded-xl bg-gray-100 shadow-md hover:shadow-lg transition duration-500 ease-in-out hover:scale-105 dark:bg-gray-900 px-2 py-5'>
             {x.title === "Software Development" && (
               <HiCode className='w-12 h-12 mb-4 text-sky-500' />
             )}

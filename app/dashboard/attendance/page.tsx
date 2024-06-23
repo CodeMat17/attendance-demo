@@ -25,7 +25,7 @@ const Attendance = () => {
       {" "}
       <div className='sticky top-0 z-40 flex items-center justify-between gap-4 px-4 py-3 dark:border-b dark:border-gray-900 shadow-md bg-inherit backdrop:filter backdrop-blur-md'>
         <section>
-          <h2 className='text-2xl font-bold'>Attendance</h2>
+          <h2 className='text-2xl font-bold'>Others</h2>
           {/* <p className='text-sm text-gray-500'>
             Total number of students: {count}
           </p> */}
@@ -47,8 +47,8 @@ const Attendance = () => {
             </p>
           </div> */}
         </section>
-     <MonthSelection  />
       </div>
+      <div className='w-full h-[30rem] flex items-center justify-center p-7'>Coming Soon!</div>
     </>
   );
 };

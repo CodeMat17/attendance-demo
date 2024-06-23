@@ -75,9 +75,9 @@ const Dashboard = async () => {
   return (
     <div className='w-full px-4 py-5'>
       <h1 className='text-3xl font-semibold'>Dashboard</h1>
-      <div className='mt-6 p-10 lg:p-5 bg-gradient-to-br from-sky-700 rounded-xl max-w-sm flex gap-4'>
-        <PiStudent className='w-16 h-16 shrink-0' />
-        <h2 className='text-xl'>
+      <div className='mt-6 p-10 lg:p-5 bg-gradient-to-br from-sky-950 via-sky-800 to-sky-400 rounded-xl max-w-sm flex gap-4'>
+        <PiStudent className='w-16 h-16 shrink-0 text-white' />
+        <h2 className='text-xl text-white'>
           Total number of registered students: {students?.length}
         </h2>
       </div>

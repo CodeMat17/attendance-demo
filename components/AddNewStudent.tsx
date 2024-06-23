@@ -24,7 +24,7 @@ const AddNewStudent = ({ fetchStudents }: Props) => {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className='border px-3 py-2 rounded-xl bg-gray-900 '>
+      <DialogTrigger className='border px-3 py-2 rounded-xl bg-sky-700 text-white dark:bg-gray-900 '>
         + Add Student
       </DialogTrigger>
       <DialogContent>

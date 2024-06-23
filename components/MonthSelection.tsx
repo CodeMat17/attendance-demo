@@ -25,7 +25,6 @@ const MonthSelection = ({ setSelectedDate }: Props) => {
 
   useEffect(() => {
     if (date) {
-      // const adjustedDate = new Date(date.getFullYear(), date.getMonth(),date. getDate())
       setSelectedDate(date);
     }
   }, [date, setSelectedDate]);

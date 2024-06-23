@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { MdSettingsSuggest } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
-import { TbLayoutDashboard, TbUsersGroup } from "react-icons/tb";
+import { TbLayoutDashboard, TbUsersGroup, TbHomeEdit } from "react-icons/tb";
 import { Button } from "./ui/button";
 import { usePathname } from "next/navigation";
 
@@ -12,16 +12,17 @@ const SideNav = () => {
   const pathname = usePathname()
   // console.log("pathname: ", pathname);
   const menuList = [
-    { id: 1, name: "Dashboard", icon: TbLayoutDashboard, path: "/dashboard" },
-    { id: 2, name: "Students", icon: PiStudent, path: "/dashboard/students" },
+    { id: 1, name: "Home", icon: TbHomeEdit, path: "/" },
+    { id: 2, name: "Dashboard", icon: TbLayoutDashboard, path: "/dashboard" },
+    { id: 3, name: "Students", icon: PiStudent, path: "/dashboard/students" },
     {
-      id: 3,
-      name: "Attendance",
+      id: 4,
+      name: "Others",
       icon: TbUsersGroup,
       path: "/dashboard/attendance",
     },
     {
-      id: 4,
+      id: 5,
       name: "Settings",
       icon: MdSettingsSuggest,
       path: "/dashboard/settings",
@@ -29,7 +30,7 @@ const SideNav = () => {
   ];
 
   return (
-    <div className='shadow-md border border-gray-700 h-screen p-4'>
+    <div className='shadow-md border border-gray-100 dark:border-gray-800 h-screen p-4'>
       <div className='flex justify-center'>
         <Image
           alt='logo'
@@ -48,16 +49,21 @@ const SideNav = () => {
           className='rounded-[5px] overflow-hidden hidden md:block'
         />
       </div>
-      <hr className='my-12 border-gray-700' />
+      <hr className='my-12  border-gray-100 dark:border-gray-800' />
 
       {menuList.map((list) => (
         <Button
-          asChild variant='ghost'
+          asChild
+          variant='ghost'
           key={list.id}
-          className={`p-5 text-slate-400 rounded-xl w-full flex justify-start hover:bg-gray-800 hover:text-white my-2 ${pathname == list.path && 'border-r-4 border-sky-500 text-sky-500'}`}>
-          <Link href={list.path} className='flex justify-center md:justify-start gap-3'>
-            <list.icon className='w-7 h-7 md:w-5 md:h-5' />
-        <p className="hidden md:flex">{list.name}</p>   
+          className={`p-5 text-slate-500 rounded-xl w-full flex justify-start hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white my-2 ${
+            pathname == list.path && "border-r-4 border-sky-500 text-sky-500"
+          }`}>
+          <Link
+            href={list.path}
+            className='flex justify-center md:justify-start gap-3'>
+            <list.icon className='w-7 h-7 md:w-6 md:h-6' />
+            <p className='hidden md:flex'>{list.name}</p>
           </Link>
         </Button>
       ))}

@@ -83,7 +83,7 @@ const StudentListComponent = () => {
 
   return (
     <>
-      <div className='px-4 py-3 border-b sticky top-0 z-40 flex justify-between items-center bg-gray-950/30 backdrop-filter backdrop-blur-md'>
+      <div className='px-4 py-3 border-b sticky top-0 z-40 flex justify-between items-center bg-white/30 dark:bg-gray-950/30 backdrop-filter backdrop-blur-md'>
         <div className=''>
           <h1 className='text-2xl font-bold'>Students</h1>
           <p className='text-sm text-gray-500'>
@@ -100,7 +100,7 @@ const StudentListComponent = () => {
             placeholder='Search students by name or by course...'
             value={searchQuery}
             onChange={handleSearchChange}
-            className='mb-4 pl-10 py-2 pb-2 w-full border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500'
+            className='mb-4 pl-10 py-2 pb-2 w-full border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 '
           />
           <CgSearch className='absolute top-2.5 w-5 h-5 ml-3 text-sky-600' />
         </div>
@@ -120,7 +120,7 @@ const StudentListComponent = () => {
                 {students.map((student) => (
                   <div
                     key={student.id}
-                    className='relative p-7 bg-gradient-to-br from-gray-800 via-gray-800 to-sky-900 rounded-xl overflow-hidden border-4 border-inherit transition duration-700 ease-in-out hover:border-sky-700'>
+                    className='relative p-7 bg-gradient-to-br from-gray-100 dark:from-gray-800 dark:via-gray-800 to-gray-100 dark:to-sky-900 rounded-xl overflow-hidden border-4 border-inherit transition duration-700 ease-in-out hover:border-sky-700'>
                     <h1 className='text-lg font-medium'>{student.fullname}</h1>
                     <h3 className='font-light tracking-widest'>
                       {student.course}
@@ -128,7 +128,7 @@ const StudentListComponent = () => {
                     <p className='text-sm text-gray-400'>{student.email}</p>
                     <p className='text-sm text-gray-400'>{student.phone}</p>
 
-                    <div className='absolute bottom-2 right-2 border flex items-center gap-4 px-2 py-1 rounded-xl bg-sky-950/20 hover:shadow-lg hover:bg-sky-950'>
+                    <div className='absolute bottom-2 right-2 border flex items-center gap-4 px-2 py-1 rounded-xl bg-white/50 dark:bg-sky-950/20 hover:shadow-md hover:bg-gray-200 dark:hover:bg-sky-950'>
                       <DeleteStudent id={student.id} name={student.fullname} />
 
                       <Link href={`/dashboard/students/${student.id}`}>
