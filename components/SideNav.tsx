@@ -1,15 +1,16 @@
-'use client'
+"use client";
 
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MdSettingsSuggest } from "react-icons/md";
 import { PiStudent } from "react-icons/pi";
-import { TbLayoutDashboard, TbUsersGroup, TbHomeEdit } from "react-icons/tb";
+import { TbHomeEdit, TbLayoutDashboard, TbUsersGroup } from "react-icons/tb";
 import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
 
 const SideNav = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   // console.log("pathname: ", pathname);
   const menuList = [
     { id: 1, name: "Home", icon: TbHomeEdit, path: "/" },
@@ -68,7 +69,14 @@ const SideNav = () => {
         </Button>
       ))}
 
-      <div className='fixed bottom-5 p-4'>User data</div>
+      <div className='fixed bottom-5 p-4'>
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,10 @@
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 import Header from "@/components/Header";
 import SideNav from "@/components/SideNav";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -19,25 +26,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
-      <body className={inter.className}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange>
-          <div>
-            <div className='fixed hidden sm:block sm:w-[120px] md:w-[200px]'>
-              <SideNav />
+    <ClerkProvider>
+      <html lang='en'>
+        <body className={inter.className}>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange>
+            <div>
+              <div className='fixed hidden sm:block sm:w-[120px] md:w-[200px]'>
+                <SideNav />
+              </div>
+              <div className='sm:ml-[120px] md:ml-[200px]'>
+                <Header />
+                {children}
+              </div>
+              <Toaster />
             </div>
-            <div className='sm:ml-[120px] md:ml-[200px]'>
-              <Header />
-              {children}
-            </div>
-            <Toaster />
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

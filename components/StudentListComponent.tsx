@@ -27,7 +27,7 @@ const StudentListComponent = () => {
   const supabase = createClient();
 
   const [students, setStudents] = useState<Student[]>([]);
-    const [totalCount, setTotalCount] = useState<number>(0);
+  const [totalCount, setTotalCount] = useState<number>(0);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [page, setPage] = useState<number>(0);
@@ -41,7 +41,7 @@ const StudentListComponent = () => {
 
   const fetchStudents = async () => {
     setLoading(true);
-    const perPage = 12;
+    const perPage = 9;
     const from = page * perPage;
     const to = from + perPage - 1;
 
@@ -69,7 +69,6 @@ const StudentListComponent = () => {
       setTotalPages(Math.ceil((count || 0) / perPage));
       setNoMatchFound(data?.length === 0);
       setTotalCount(count || 0);
-     
     }
 
     setLoading(false);
@@ -77,8 +76,7 @@ const StudentListComponent = () => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-      setPage(0); // Reset to first page on new search
-     
+    setPage(0); // Reset to first page on new search
   };
 
   return (
@@ -116,7 +114,7 @@ const StudentListComponent = () => {
                 No match found. Try again.
               </h1>
             ) : (
-              <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mt-12'>
+              <div className='w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-3 mt-12'>
                 {students.map((student) => (
                   <div
                     key={student.id}
@@ -129,7 +127,11 @@ const StudentListComponent = () => {
                     <p className='text-sm text-gray-400'>{student.phone}</p>
 
                     <div className='absolute bottom-2 right-2 border flex items-center gap-4 px-2 py-1 rounded-xl bg-white/50 dark:bg-sky-950/20 hover:shadow-md hover:bg-gray-200 dark:hover:bg-sky-950'>
-                      <DeleteStudent id={student.id} name={student.fullname} />
+                      <DeleteStudent
+                        id={student.id}
+                        name={student.fullname}
+                        fetchStudents={fetchStudents}
+                      />
 
                       <Link href={`/dashboard/students/${student.id}`}>
                         <TbEdit className='w-6 h-6 text-sky-400 hover:text-sky-600' />

@@ -1,6 +1,7 @@
 import MarkAttendance from "@/components/MarkAttendance";
 import { createClient } from "@/utils/supabase/server";
 import { notFound } from "next/navigation";
+import { auth, currentUser } from "@clerk/nextjs/server";
 
 export const revalidate = 0;
 
@@ -11,6 +12,17 @@ type Props = {
 };
 
 const StudentPage = async ({ params: { id } }: Props) => {
+
+ const user = await currentUser();
+
+ if (user?.publicMetadata.role !== "admin") {
+   return (
+     <div className='w-full h-[30rem] flex justify-center py-32 tracking-widest'>
+       You are not an admin.
+     </div>
+   );
+ }
+
   const supabase = createClient();
 
   const { data: student, error } = await supabase

@@ -13,7 +13,15 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 
-const DeleteStudent = ({ id, name }: { id: string; name: string }) => {
+const DeleteStudent = ({
+  id,
+  name,
+  fetchStudents,
+}: {
+  id: string;
+  name: string;
+  fetchStudents: () => void;
+}) => {
   const supabase = createClient();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -26,6 +34,7 @@ const DeleteStudent = ({ id, name }: { id: string; name: string }) => {
     }
     if (!error) {
       toast.success("Student deleted successfully");
+      fetchStudents();
       router.refresh();
     }
   };
