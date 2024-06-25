@@ -94,7 +94,7 @@ const StudentListComponent = () => {
       <div className='max-w-5xl mx-auto p-4'>
         <div className='relative w-full max-w-md mx-auto'>
           <Input
-            type='text'
+            type='search'
             placeholder='Search students by name or by course...'
             value={searchQuery}
             onChange={handleSearchChange}
