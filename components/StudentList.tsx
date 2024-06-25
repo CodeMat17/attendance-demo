@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { Input } from "./ui/input";
 
-import StudentCardList from "./StudentCardList";
 
 type Props = {
   count: number | null;
