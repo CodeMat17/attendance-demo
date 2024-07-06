@@ -1,21 +1,12 @@
 import ServiceTab from "@/components/ServiceTab";
 import { createClient } from "@/utils/supabase/server";
-import { currentUser } from "@clerk/nextjs/server";
 import { GiPublicSpeaker } from "react-icons/gi";
 import { HiCode, HiOutlinePhotograph } from "react-icons/hi";
 import { PiStudent } from "react-icons/pi";
 import { SiAntdesign } from "react-icons/si";
 
 const Dashboard = async () => {
-  const user = await currentUser();
-
-  if (user?.publicMetadata.role !== "admin") {
-    return (
-      <div className='w-full h-[30rem] flex justify-center py-32 tracking-widest'>
-        You are not an admin.
-      </div>
-    );
-  }
+  
 
   const Supabase = createClient();
 
@@ -79,7 +70,7 @@ const Dashboard = async () => {
       percent: publicSpeakingPercent,
       icon: GiPublicSpeaker,
     },
-  ];
+  ]; 
 
   return (
     <div className='w-full px-4 py-5'>

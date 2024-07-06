@@ -3,21 +3,22 @@ import { Button } from "./ui/button";
 
 export function FlipWordsDemo() {
   const words = [
-    "Software-Development",
-    "Graphic-Design",
-    "Photography",
+    "Software-Development,",
+    "Graphic-Design,",
+    "Photography,",
     "and",
-    "Public-Speaking",
+    "Public-Speaking,",
   ];
 
   return (
     <div className='h-[30rem] flex justify-center items-center px-4 lg:pl-8'>
       <div className='text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400'>
         <div className='mb-12'>
-          This is <span className='text-sky-500 '>GOUNI STEP</span> lesson attendance register.
+          This is an <span className='text-sky-500 '>ONLINE REGISTER</span> for
+          our <span className='text-sky-500 '>online school</span>.
         </div>
-        <div>Mark students attendance</div>
-        for
+        <div>Enroll today to study the following courses:</div>
+        <br/>
         <FlipWords words={words} /> <br />
         {/* websites with Aceternity UI */}
         {/* <div className='flex justify-start mt-10 '>

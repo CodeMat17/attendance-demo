@@ -1,6 +1,6 @@
 "use client";
 
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -69,13 +69,8 @@ const SideNav = () => {
         </Button>
       ))}
 
-      <div className='fixed bottom-5 p-4'>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+      <div className='fixed bottom-5 p-4 text-xs'>
+       User details
       </div>
     </div>
   );

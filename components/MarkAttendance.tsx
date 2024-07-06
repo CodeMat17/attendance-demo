@@ -86,6 +86,7 @@ const MarkAttendance = ({ id }: { id: string }) => {
     getAttendance();
   }, [id, getAttendance]);
 
+
   const markAttendance = async () => {
     if (selectedClass) {
       try {

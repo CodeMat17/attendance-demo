@@ -1,6 +1,7 @@
 {
-  "name": "students-attendance",
-  "version": "0.1.0",
+  "name": "attendance-demo",
+  "version": "0.1.1",
+  "description": "Online attendance demo for portfolio",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,7 +27,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",
-    "framer-motion": "^11.2.11",
+    "framer-motion": "^11.2.13",
     "next": "14.2.4",
     "next-themes": "^0.3.0",
     "react": "^18",

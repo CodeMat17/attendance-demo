@@ -1,5 +1,4 @@
 import StudentListComponent from "@/components/StudentListComponent";
-import { auth, currentUser } from "@clerk/nextjs/server";
 
 import { createClient } from "@/utils/supabase/server";
 
@@ -7,16 +6,7 @@ export const revalidate = 0;
 
 const Students = async () => {
 
-  const user = await currentUser();
-
-  if (user?.publicMetadata.role !== "admin") {
-    return (
-      <div className='w-full h-[30rem] flex justify-center py-32 tracking-widest'>
-        You are not an admin.
-      </div>
-    );
-  }
-
+ 
   // const supabase = createClient();
 
   // const { count } = await supabase

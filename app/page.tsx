@@ -1,18 +1,12 @@
-
-import { FlipWordsDemo } from '@/components/FlipWordsDemo'
-
+import { FlipWordsDemo } from "@/components/FlipWordsDemo";
 
 const Home = () => {
-
-  
-
   return (
     <div>
-
       {/* <TypewriterEffectNote /> */}
       <FlipWordsDemo />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
