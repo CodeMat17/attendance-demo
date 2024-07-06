@@ -14,7 +14,7 @@ export function FlipWordsDemo() {
     <div className='h-[30rem] flex justify-center items-center px-4 lg:pl-8'>
       <div className='text-4xl mx-auto font-normal text-neutral-600 dark:text-neutral-400'>
         <div className='mb-12'>
-          This is an <span className='text-sky-500 '>ONLINE REGISTER</span> for
+          This is an <span className='text-sky-500 '>ONLINE ATTENDANCE REGISTER</span> for
           our <span className='text-sky-500 '>online school</span>.
         </div>
         <div>Enroll today to study the following courses:</div>
